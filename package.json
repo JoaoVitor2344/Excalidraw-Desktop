@@ -8,16 +8,45 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "npm run build && electron ."
+    "preview": "vite preview",
+    "electron": "electron .",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.excalidraw.desktop",
+    "productName": "Excalidraw Desktop",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.js",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.17.6",
-    "electron": "^31.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.6.0",
+    "electron": "^31.0.2",
+    "electron-builder": "^26.0.12",
     "vite": "^6.3.5"
   }
 }
